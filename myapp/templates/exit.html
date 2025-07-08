@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exit</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+    <script>
+        function exit(){window.close()}
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(to right, #e0f7fa, #ffffff);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .exit-card {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .exit-card h1 {
+            color: #007bff;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .exit-card h2 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .btn-home {
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+
+        .btn-home:hover {
+            transform: scale(1.05);
+            background-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="exit-card">
+        <h1 >Thank you for using YouTube</h1>
+        <h2  style="font-size:20px;">Do you want to close the window close the browser Tab</h2>
+
+        <hr>
+        <h2  style="font-size:20px;">If you want to go back to youtube click below</h2>
+        <a class="btn btn-info text-white btn-home" href="/" style="font-size:30px;">
+            <i class="bi bi-house-door-fill"></i> Go to Home
+        </a>
+    </div>
+
+</body>
+</html>

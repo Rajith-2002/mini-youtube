@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shorts</title>
+  {% load static %}
+  <script src="{% static 'bootstrap.min.js' %}"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+   <!-- ✅ jQuery (first) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+
+<!-- ✅ Popper.js (second) -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- ✅ Bootstrap JS (third) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    /* Custom dropdown style */
+    .dropdown-menu {
+        background-color: #343a40; /* dark background */
+        border-radius: 10px;
+        padding: 10px;
+        min-width: 120px;
+        box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .dropdown-menu .dropdown-item {
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 5px;
+        transition: background-color 0.2s ease;
+    }
+
+    .dropdown-menu .dropdown-item:hover {
+        background-color: #495057;
+        color: #fff;
+    }
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding-bottom: 80px;
+    }
+
+    h2 {
+      color: #0dcaf0;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .shorts-container {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+    .a:hover{color:red;}
+
+    .short {
+      background-color: #1a1a1a;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 30px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      border-bottom: 1px solid #333;
+    }
+
+    .short-content {
+      padding: 12px;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #e83e8c;
+      margin-bottom: 5px;
+    }
+
+    .description {
+      font-size: 14px;
+      color: #ccc;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .btn-row, .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .btn-sm {
+      font-size: 13px;
+    }
+
+    .share-buttons a {
+      text-decoration: none;
+      font-size: 13px;
+      color: white;
+      background-color: #222;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    .share-buttons a:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+
+<h2><i class="bi bi-lightning-fill"></i> Shorts</h2>
+
+<div class="shorts-container">
+  {% for shorts in short %}
+  <div class="short">
+    <video controls>
+      <source src="{{ shorts.short_file.url }}">
+    </video>
+    <div class="short-content">
+      <div class="title"> {{ shorts.title }}</div>
+      <div class="description"> {{ shorts.description }}</div>
+
+      <div class="btn-row">
+        <a href="{{ shorts.short_file.url }}" download class="btn btn-sm btn-primary">
+          <i class="bi bi-download"></i> Download
+        </a>
+        <a href="/deleteshort/{{ shorts.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Do you want to delete?')">
+          <i class="bi bi-trash"></i> Delete
+        </a>
+      </div>
+
+      <div class="share-buttons">
+        <a href="https://wa.me/?text={{ request.build_absolute_uri|add:'#short'|add:shorts.id }}" target="_blank">
+          <i class="bi bi-whatsapp"></i> WhatsApp
+        </a>
+        <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|add:'#short'|add:shorts.id }}" target="_blank">
+          <i class="bi bi-twitter-x"></i> Twitter
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Bottom navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
+  <div class="container justify-content-around">
+    <a class="nav-link text-white" href="/"><i class="bi bi-house-door-fill"></i> Home</a>
+    <a class="nav-link text-white" href="/shorts/"><i class="bi bi-lightning-fill"></i> Shorts</a>
+    <a class="nav-link text-white" href="/video_list/"><i class="bi bi-collection-play-fill"></i> Videos</a>
+    <a class="nav-link text-white" href="/upload/"><i class="bi bi-cloud-upload-fill"></i> Upload</a>
+    <div class="btn-group dropup">
+            <button type="button" class="btn text-white dropdown-toggle" data-toggle="dropdown" >
+                <i class="bi bi-gear-fill"></i> Settings
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/help/"><i class="bi bi-question-circle-fill"></i> Help</a>
+                <a class="dropdown-item" href="/about/"><i class="bi bi-info-circle"></i> About</a>
+                <a class="dropdown-item" href="/contact/"><i class="bi bi-envelope"></i> Contact</a>
+                <a class="dropdown-item" href="/feedback/"><i class="bi bi-chat-dots"></i> Feedback</a>
+                <a class="dropdown-item" href="/exit/" onclick="exit()"><i class="bi bi-box-arrow-right"></i> Exit</a>
+      </div>
+        </div>
+  </div>
+</nav>
+
+</body>
+</html>
