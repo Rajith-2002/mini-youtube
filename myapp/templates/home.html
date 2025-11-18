@@ -3,74 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-  {% load static %}
-  <script  src="{% static 'bootstrap.min.js'%}"></script>
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+    <script src="{% static 'bootstrap.min.js'%}"></script>
+
+    <!-- Bootstrap + Icons -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <!-- ✅ jQuery (first) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
+    <!-- jQuery + Popper + Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- ✅ Popper.js (second) -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
-<!-- ✅ Bootstrap JS (third) -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
-    /* Custom dropdown style */
+
+    /* ---------- FULL PAGE BACKGROUND ---------- */
+    body {
+        background: linear-gradient(135deg, #1e1e1e, #343a40, #1e1e1e);
+        color: white;
+        min-height: 100vh;
+        padding-bottom: 70px; /* Space for bottom navbar */
+    }
+
+    /* ---------- CENTER WHITE AREA GLASS EFFECT ---------- */
+    form.bg-secondary {
+        background: rgba(255,255,255,0.1) !important;
+        backdrop-filter: blur(10px);
+        color: white;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.2);
+        width: 92%;
+        margin: 20px auto;
+        padding: 25px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    }
+
+    /* ---------- INPUT BOX BEAUTY ---------- */
+    input[type="text"] {
+        background: rgba(255,255,255,0.15);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.5);
+        padding-left: 15px;
+        font-size: 17px;
+    }
+
+    input[type="text"]::placeholder {
+        color: #d9d9d9;
+    }
+
+    /* ---------- SEARCH BUTTON ---------- */
+    .btn-success {
+        border-radius: 20px;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+
+    .btn-success:hover {
+        background: #00e5ff;
+        color: black;
+        box-shadow: 0 0 10px #00e5ff;
+    }
+
+    /* ---------- DROPUP MENU STYLING ---------- */
     .dropdown-menu {
-        background-color: #343a40; /* dark background */
+        background-color: #343a40;
         border-radius: 10px;
         padding: 10px;
-        min-width: 120px;
-        box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.3);
+        min-width: 140px;
+        box-shadow: 0px -2px 10px rgba(0,0,0,0.3);
     }
 
     .dropdown-menu .dropdown-item {
-        color: #fff;
+        color: white;
         padding: 8px 12px;
         border-radius: 5px;
-        transition: background-color 0.2s ease;
+        transition: 0.2s;
     }
 
     .dropdown-menu .dropdown-item:hover {
-        background-color: #495057;
-        color: #fff;
+        background: #495057;
     }
-  </style>
+
+    </style>
 
 </head>
+
 <body>
-<form method="post" action="/search/" style="text-align:center" class="bg-secondary">
+
+<!-- ---------- SEARCH BAR (CENTER GLASS UI) ---------- -->
+<form method="post" action="/search/" class="bg-secondary" style="text-align:center;">
    {% csrf_token %}
-    <input type="text" name="q" placeholder="search videos" required style="width:230px;height:45px;border-radius:20px;"/>
-    <button type="submit" class="btn btn-outline-info  btn-success text-dark" >Search</button>
-<a class="btn btn-danger" href="/exit/" style="float:right;margin:0 5px;font-size:20px;" ><i class="bi bi-box-arrow-right"></i> Exit</a>
+    <input type="text" name="q" placeholder="Search videos" required
+           style="width:230px;height:45px;border-radius:20px;"/>
+    <button type="submit" class="btn btn-outline-info btn-success text-dark">Search</button>
+
+    <a class="btn btn-danger" href="/exit/"
+       style="float:right;margin:0 5px;font-size:20px;">
+        <i class="bi bi-box-arrow-right"></i> Exit
+    </a>
 </form>
 
-<!-- Fixed Bottom Navbar -->
+
+
+<!-- ---------- FIXED BOTTOM NAV ---------- -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
   <div class="container justify-content-around">
     <a class="nav-link text-white" href="/"><i class="bi bi-house-door-fill"></i> Home</a>
     <a class="nav-link text-white" href="/shorts/"><i class="bi bi-lightning-fill"></i> Shorts</a>
     <a class="nav-link text-white" href="/video_list/"><i class="bi bi-collection-play-fill"></i> Videos</a>
     <a class="nav-link text-white" href="/upload/"><i class="bi bi-cloud-upload-fill"></i> Upload</a>
+
     <div class="btn-group dropup">
-            <button type="button" class="btn text-white dropdown-toggle" data-toggle="dropdown" >
-                <i class="bi bi-gear-fill"></i> Settings
-            </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="/help/"><i class="bi bi-question-circle-fill"></i> Help</a>
-                <a class="dropdown-item" href="/about/"><i class="bi bi-info-circle"></i> About</a>
-                <a class="dropdown-item" href="/contact/"><i class="bi bi-envelope"></i> Contact</a>
-                <a class="dropdown-item" href="/feedback/"><i class="bi bi-chat-dots"></i> Feedback</a>
-                <a class="dropdown-item" href="/exit/" onclick="exit()"><i class="bi bi-box-arrow-right"></i> Exit</a>
-      </div>
+        <button class="btn text-white dropdown-toggle" data-toggle="dropdown">
+            <i class="bi bi-gear-fill"></i> Settings
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="/help/"><i class="bi bi-question-circle-fill"></i> Help</a>
+            <a class="dropdown-item" href="/about/"><i class="bi bi-info-circle"></i> About</a>
+            <a class="dropdown-item" href="/contact/"><i class="bi bi-envelope"></i> Contact</a>
+            <a class="dropdown-item" href="/feedback/"><i class="bi bi-chat-dots"></i> Feedback</a>
+            <a class="dropdown-item" href="/exit/"><i class="bi bi-box-arrow-right"></i> Exit</a>
         </div>
+    </div>
   </div>
 </nav>
-
-
 
 </body>
 </html>
