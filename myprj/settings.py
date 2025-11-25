@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+from django.conf.global_settings import CSRF_TRUSTED_ORIGINS
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
 ]
+CSRF_TRUSTED_ORIGINS=['https://mini-youtube-3.onrender.com']
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
