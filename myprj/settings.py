@@ -25,9 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-kg+b&2l815z18+m94g7ugamo+_vm(q%j&e4pi2hx%x+5-8&c&f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'mini-youtube-3.onrender.com',
+    'localhost',
+    '127.0.0.1',
+    '*'
+]
 
 
 # Application definition
@@ -41,7 +46,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
 ]
-CSRF_TRUSTED_ORIGINS=['https://mini-youtube-3.onrender.com']
+CSRF_TRUSTED_ORIGINS = [
+    'https://mini-youtube-3.onrender.com',
+    'http://mini-youtube-3.onrender.com',
+    'https://*.onrender.com',
+    'http://*.onrender.com',
+]
 
 
 MIDDLEWARE = [
